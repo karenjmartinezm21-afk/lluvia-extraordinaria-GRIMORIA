@@ -1,0 +1,535 @@
+# ==============================================================================
+# SERVIDOR WEB PYTHON - CAMPAÑA "LLUVIA EXTRAORDINARIA" DE GRIMORIA
+#
+# Para ejecutar esta aplicación:
+# 1. Asegúrate de tener instalado Flask (pip install flask)
+# 2. Ejecuta en tu terminal: python app.py
+# 3. Abre tu navegador e ingresa a: http://127.0.0.1:5000
+# ==============================================================================
+
+import sys
+from flask import Flask, render_template_string
+
+# Inicialización de la aplicación Flask
+app = Flask(__name__)
+
+# Plantilla HTML con el diseño místico estilo Tim Burton / Grimoria
+HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grimoria - Lluvia Extraordinaria</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes Google: Cinzel Decorative, Henny Penny y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Henny+Penny&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        grimoria: {
+                            dark: '#0f0814',
+                            purple: '#20102b',
+                            midPurple: '#3c1d4a',
+                            plum: '#59225c',
+                            gold: '#d4af37',
+                            goldLight: '#f3e5ab',
+                            goldDark: '#997a15',
+                            rose: '#8b1d3d',
+                            lavenderPastel: '#e2d5f8',
+                            darkCard: '#180c21'
+                        }
+                    },
+                    fontFamily: {
+                        gothic: ['"Cinzel Decorative"', 'serif'],
+                        fantasy: ['"Henny Penny"', 'cursive'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f0814;
+            color: #e2d5f8;
+            font-family: 'Montserrat', sans-serif;
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(60, 29, 74, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(139, 29, 61, 0.25) 0%, transparent 50%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .font-gothic { font-family: 'Cinzel Decorative', serif; }
+        .font-fantasy { font-family: 'Henny Penny', cursive; }
+
+        .gothic-box {
+            background: rgba(24, 12, 33, 0.85);
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        .gold-glow {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6), 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .golden-ticket {
+            background: linear-gradient(135deg, #2b1f0d 0%, #4a3818 30%, #2b1f0d 70%, #1a1205 100%);
+            border: 2px dashed #d4af37;
+            position: relative;
+        }
+
+        .golden-ticket::before, .golden-ticket::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #0f0814;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .golden-ticket::before { left: -13px; border-right: 2px solid #d4af37; }
+        .golden-ticket::after { right: -13px; border-left: 2px solid #d4af37; }
+
+        .social-btn {
+            transition: all 0.3s ease;
+            background: rgba(60, 29, 74, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+        }
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-magic {
+            background: linear-gradient(180deg, #d4af37 0%, #997a15 100%);
+            color: #0f0814;
+            font-weight: 700;
+            border: 1px solid #f3e5ab;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-magic:hover {
+            background: linear-gradient(180deg, #f3e5ab 0%, #d4af37 100%);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .floating-key {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative pb-12">
+
+    <!-- Fondo de Estrellas -->
+    <canvas id="starsCanvas" class="stars-bg"></canvas>
+
+    <div class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 space-y-8">
+
+        <!-- CABECERA PRINCIPAL Y BARRA SOCIAL -->
+        <header class="gothic-box rounded-2xl p-6 text-center relative overflow-hidden">
+            <div class="absolute -top-12 -left-12 w-32 h-32 bg-grimoria-rose/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-grimoria-gold/20 rounded-full blur-2xl"></div>
+
+            <div class="space-y-3">
+                <p class="font-fantasy text-grimoria-goldLight text-lg tracking-widest uppercase">Lluvia Extraordinaria</p>
+                <h1 class="font-gothic text-4xl sm:text-6xl text-grimoria-gold font-black tracking-wider gold-glow">GRIMORIA</h1>
+                <p class="text-sm sm:text-base italic text-grimoria-lavenderPastel/80 font-light max-w-xl mx-auto">
+                    "Lo extraño también es extraordinario"
+                </p>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="mt-6 pt-6 border-t border-grimoria-gold/20 flex flex-wrap justify-center gap-3 sm:gap-4">
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 text-grimoria-lavenderPastel">
+                    <i class="fab fa-instagram text-base text-grimoria-gold"></i>
+                    <span>@Grimoria</span>
+                </a>
+                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 text-grimoria-lavenderPastel">
+                    <i class="fab fa-tiktok text-base text-grimoria-gold"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 text-grimoria-lavenderPastel">
+                    <i class="fab fa-facebook-f text-base text-grimoria-gold"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://grimoria.co" target="_blank" rel="noopener noreferrer" class="social-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 text-grimoria-lavenderPastel">
+                    <i class="fas font-fantasy fa-globe text-base text-grimoria-gold"></i>
+                    <span>Sitio Web</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- PRESENTACIÓN MÍSTICA -->
+        <section class="gothic-box rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-grimoria-gold/10 rounded-full blur-2xl"></div>
+            <div class="max-w-2xl mx-auto space-y-3">
+                <h2 class="font-gothic text-2xl sm:text-3xl text-grimoria-gold">¿Has recibido el llamado del destino?</h2>
+                <p class="text-sm sm:text-base text-grimoria-lavenderPastel/90 leading-relaxed">
+                    Si tienes un tiquete de la <strong class="text-grimoria-gold">Lluvia Extraordinaria</strong>, estás a punto de revelar el secreto que guarda tu historia. Gira la ruleta del oráculo o abre el candado de la Llave Dorada.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 1: REVELAR PREMIO / RULETA MÍSTICA -->
+        <section class="gothic-box rounded-2xl p-6 sm:p-8 relative">
+            <div class="text-center space-y-2 mb-6">
+                <div class="inline-block px-3 py-1 bg-grimoria-plum/40 border border-grimoria-gold/30 rounded-full text-xs font-fantasy text-grimoria-goldLight uppercase tracking-wider">
+                    Oráculo de la Suerte
+                </div>
+                <h3 class="font-gothic text-2xl sm:text-3xl text-grimoria-gold">Descubre tu Premio</h3>
+                <p class="text-xs sm:text-sm text-grimoria-lavenderPastel/70">Toca el botón para girar la ruleta y revelar el tesoro que te ha tocado.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8 my-4">
+                <!-- Ruleta Canvas -->
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center shrink-0">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 z-20 text-grimoria-gold text-3xl filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                    <canvas id="wheelCanvas" width="320" height="320" class="w-full h-full rounded-full border-4 border-grimoria-gold shadow-2xl"></canvas>
+                    <button id="spinBtn" onclick="spinWheel()" class="absolute z-10 w-20 h-20 bg-grimoria-purple border-2 border-grimoria-gold rounded-full text-grimoria-gold font-gothic text-xs font-bold uppercase tracking-wider flex items-center justify-center text-center shadow-lg hover:scale-105 active:scale-95 transition-all">
+                        ¡GIRAR!
+                    </button>
+                </div>
+
+                <!-- Resultado del Premio -->
+                <div id="prizeResultContainer" class="w-full max-w-md hidden">
+                    <div class="golden-ticket p-6 rounded-xl text-center space-y-4 shadow-2xl transform transition-all duration-500 scale-95 animate-fade-in">
+                        <div class="text-grimoria-gold text-3xl">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase font-fantasy text-grimoria-goldLight tracking-widest">¡Felicidades, Alma Curiosa!</span>
+                            <h4 id="prizeTitle" class="font-gothic text-2xl text-grimoria-gold font-bold my-1"></h4>
+                            <p id="prizeDescription" class="text-xs sm:text-sm text-grimoria-lavenderPastel/90 italic leading-relaxed"></p>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded-lg border border-grimoria-gold/30 flex items-center justify-between gap-2">
+                            <span class="text-xs text-grimoria-goldLight font-mono" id="prizeCode"></span>
+                            <button onclick="copyPrizeCode()" class="px-3 py-1 bg-grimoria-gold/20 hover:bg-grimoria-gold/40 border border-grimoria-gold/50 rounded text-xs text-grimoria-gold font-semibold transition">
+                                <i class="far fa-copy mr-1"></i> Copiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: ACCESO EXCLUSIVO LLAVE DORADA -->
+        <section class="gothic-box rounded-2xl p-6 sm:p-8 relative overflow-hidden border-2 border-grimoria-gold">
+            <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-grimoria-gold/10 rounded-full blur-3xl"></div>
+
+            <div class="max-w-xl mx-auto text-center space-y-4 relative z-10">
+                <div class="inline-block p-3 bg-grimoria-gold/10 rounded-full border border-grimoria-gold/30 mb-1">
+                    <i class="fas fa-key text-3xl text-grimoria-gold floating-key"></i>
+                </div>
+                <h3 class="font-gothic text-2xl sm:text-3xl text-grimoria-gold font-bold">Portal de la Llave Dorada</h3>
+                <p class="text-sm text-grimoria-lavenderPastel leading-relaxed">
+                    Reservado únicamente para los <strong class="text-grimoria-gold">5 afortunados</strong> que encontraron la reliquia dorada en el interior de su empaque.
+                </p>
+
+                <!-- Tarjeta contenedora de formulario -->
+                <div class="bg-grimoria-purple/80 border border-grimoria-gold/40 p-6 rounded-xl space-y-4 shadow-xl">
+                    <label for="goldenCode" class="block text-xs font-fantasy text-grimoria-goldLight text-left">
+                        Ingresa el código secreto grabado en tu llave:
+                    </label>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="goldenCode" placeholder="Ej: LLAVE-GOLD-2026" class="w-full px-4 py-3 bg-black/60 border border-grimoria-gold/40 rounded-lg text-grimoria-goldLight placeholder-grimoria-lavenderPastel/30 font-mono text-sm focus:outline-none focus:border-grimoria-gold focus:ring-1 focus:ring-grimoria-gold">
+                        <button onclick="validateGoldenKey()" class="btn-magic px-6 py-3 rounded-lg text-sm whitespace-nowrap uppercase tracking-wider font-bold">
+                            Validar
+                        </button>
+                    </div>
+                    
+                    <!-- GUÍA DE CÓDIGOS VÁLIDOS DE PRUEBA -->
+                    <div class="pt-2 text-left border-t border-grimoria-gold/10">
+                        <p class="text-[11px] text-grimoria-gold/80 font-mono">
+                            <i class="fas fa-info-circle mr-1"></i> <strong>Códigos válidos de acceso:</strong> 
+                            <span class="underline cursor-pointer hover:text-grimoria-goldLight" onclick="fillKey('LLAVE-GOLD-2026')">LLAVE-GOLD-2026</span>, 
+                            <span class="underline cursor-pointer hover:text-grimoria-goldLight" onclick="fillKey('GRIMORIA-GOLD-1')">GRIMORIA-GOLD-1</span>, 
+                            <span class="underline cursor-pointer hover:text-grimoria-goldLight" onclick="fillKey('GRIMORIA-GOLD-2')">GRIMORIA-GOLD-2</span>
+                        </p>
+                    </div>
+
+                    <p id="goldenError" class="text-xs text-grimoria-rose font-semibold text-left hidden">
+                        <i class="fas fa-exclamation-circle mr-1"></i> El código ingresado no es válido o ya fue reclamado.
+                    </p>
+                </div>
+
+                <!-- Resultado VIP Llave Dorada -->
+                <div id="goldenSuccess" class="hidden mt-6 text-left p-6 bg-gradient-to-b from-grimoria-purple to-black border-2 border-grimoria-gold rounded-xl space-y-4 relative overflow-hidden animate-fade-in shadow-2xl">
+                    <div class="flex items-center gap-3 text-grimoria-gold">
+                        <i class="fas fa-crown text-2xl"></i>
+                        <h4 class="font-gothic text-xl font-bold">¡Bienvenido al Círculo Dorado!</h4>
+                    </div>
+                    <p class="text-sm text-grimoria-lavenderPastel leading-relaxed">
+                        Has desbloqueado el máximo privilegio de <strong class="text-grimoria-gold">Grimoria</strong>. Tu llave autentica tu pase anual completo.
+                    </p>
+                    <div class="p-4 bg-black/70 border border-grimoria-gold/50 rounded-lg space-y-2">
+                        <div class="flex justify-between items-center text-xs text-grimoria-gold">
+                            <span>BENEFICIO ACTIVO</span>
+                            <span class="font-mono">1 AÑO GRATIS</span>
+                        </div>
+                        <p class="text-xs text-grimoria-lavenderPastel/80">
+                            Recibirás automáticamente y sin costo cada nueva colección de cajas sorpresa que publiquemos durante los próximos 365 días.
+                        </p>
+                    </div>
+                    <p class="text-xs text-center text-grimoria-goldLight italic">
+                        Nos pondremos en contacto directamente a través de nuestras redes sociales registradas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PIE DE PÁGINA -->
+        <footer class="text-center space-y-2 pt-6 text-xs text-grimoria-lavenderPastel/50">
+            <p>© 2026 Grimoria. Todos los derechos reservados.</p>
+            <p class="font-fantasy text-grimoria-gold/60">"La curiosidad tiene quince capítulos"</p>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT DE LA LÓGICA E INTERACTIVIDAD -->
+    <script>
+        // --- 1. CONFIGURACIÓN DE LA RULETA DE PREMIOS ---
+        const prizes = [
+            { label: '25% Desc. Caja', desc: '¡Obtienes 25% de descuento en tu próxima Caja Sorpresa de Grimoria!', code: 'GRIM-25OFF-99' },
+            { label: 'Caja Gratis', desc: '¡Increíble! Te has ganado una Caja Sorpresa completamente GRATIS.', code: 'GRIM-FREEBOX-01' },
+            { label: '50% Desc.', desc: '¡Gran suerte! Tienes un 50% de descuento en tu pedido.', code: 'GRIM-50OFF-77' },
+            { label: '15% Desc. Extra', desc: '¡Has obtenido un 15% de descuento adicional para tu compra!', code: 'GRIM-15EXTRA' },
+            { label: 'Envío Gratis 1 Año', desc: '¡Felicidades! Tienes Envío Gratis por un año completo en todas tus cajas sorpresa.', code: 'GRIM-SHIPFREE1YR' },
+            { label: 'Sorpresa Especial', desc: '¡Un detalle misterioso sorpresa te espera en tu próximo pedido!', code: 'GRIM-MYSTERY' }
+        ];
+
+        const colors = ['#20102b', '#3c1d4a', '#20102b', '#8b1d3d', '#20102b', '#3c1d4a'];
+        let currentAngle = 0;
+        let isSpinning = false;
+
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const numSlices = prizes.length;
+            const sliceAngle = (2 * Math.PI) / numSlices;
+            const radius = canvas.width / 2;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < numSlices; i++) {
+                const angle = currentAngle + i * sliceAngle;
+                
+                // Dibujar sector
+                ctx.beginPath();
+                ctx.moveTo(radius, radius);
+                ctx.arc(radius, radius, radius - 5, angle, angle + sliceAngle);
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#d4af37';
+                ctx.stroke();
+
+                // Dibujar Texto
+                ctx.save();
+                ctx.translate(radius, radius);
+                ctx.rotate(angle + sliceAngle / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = "#d4af37";
+                ctx.font = "bold 13px Montserrat";
+                ctx.fillText(prizes[i].label, radius - 20, 5);
+                ctx.restore();
+            }
+
+            // Borde interior
+            ctx.beginPath();
+            ctx.arc(radius, radius, 40, 0, 2 * Math.PI);
+            ctx.fillStyle = '#0f0814';
+            ctx.fill();
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+
+            const spinBtn = document.getElementById('spinBtn');
+            spinBtn.disabled = true;
+            spinBtn.classList.add('opacity-50');
+
+            const resultContainer = document.getElementById('prizeResultContainer');
+            resultContainer.classList.add('hidden');
+
+            // Giros aleatorios
+            const extraRounds = 5 + Math.floor(Math.random() * 5);
+            const randomSlice = Math.floor(Math.random() * prizes.length);
+            const sliceAngle = (2 * Math.PI) / prizes.length;
+            
+            // Ángulo objetivo (alineado con la flecha superior)
+            const targetAngle = (3 * Math.PI / 2) - (randomSlice * sliceAngle) - (sliceAngle / 2);
+            const totalRotation = (extraRounds * 2 * Math.PI) + targetAngle;
+
+            const startAngle = currentAngle;
+            const startTime = performance.now();
+            const duration = 4000; // 4 segundos
+
+            function animateSpin(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Easing suave out
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                currentAngle = startAngle + (totalRotation - startAngle) * easeOut;
+
+                drawWheel();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    isSpinning = false;
+                    spinBtn.disabled = false;
+                    spinBtn.classList.remove('opacity-50');
+                    showPrize(prizes[randomSlice]);
+                }
+            }
+
+            requestAnimationFrame(animateSpin);
+        }
+
+        function showPrize(prize) {
+            document.getElementById('prizeTitle').innerText = prize.label;
+            document.getElementById('prizeDescription').innerText = prize.desc;
+            document.getElementById('prizeCode').innerText = prize.code;
+            
+            const container = document.getElementById('prizeResultContainer');
+            container.classList.remove('hidden');
+        }
+
+        function copyPrizeCode() {
+            const codeText = document.getElementById('prizeCode').innerText;
+            const tempInput = document.createElement('input');
+            tempInput.value = codeText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('¡Código copiado al portapapeles: ' + codeText);
+        }
+
+        // --- 2. VALIDACIÓN DE LLAVE DORADA ---
+        const validGoldenKeys = [
+            'LLAVE-GOLD-2026', 
+            'GRIMORIA-GOLD-1', 
+            'GRIMORIA-GOLD-2', 
+            'GRIMORIA-GOLD-3', 
+            'GRIMORIA-GOLD-4', 
+            'GRIMORIA-GOLD-5'
+        ];
+
+        function fillKey(code) {
+            document.getElementById('goldenCode').value = code;
+        }
+
+        function validateGoldenKey() {
+            const input = document.getElementById('goldenCode').value.trim().toUpperCase();
+            const errorMsg = document.getElementById('goldenError');
+            const successBox = document.getElementById('goldenSuccess');
+
+            if (validGoldenKeys.includes(input)) {
+                errorMsg.classList.add('hidden');
+                successBox.classList.remove('hidden');
+            } else {
+                successBox.classList.add('hidden');
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // --- 3. FONDO DE ESTRELLAS MÍSTICAS ---
+        function initStars() {
+            const canvas = document.getElementById('starsCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const stars = Array.from({ length: 60 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.02 + 0.005
+            }));
+
+            function drawStars() {
+                ctx.clearRect(0, 0, width, height);
+                stars.forEach(star => {
+                    star.alpha += star.speed;
+                    if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(212, 175, 55, ${Math.abs(star.alpha)})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(drawStars);
+            }
+
+            drawStars();
+        }
+
+        window.onload = function() {
+            drawWheel();
+            initStars();
+        };
+    </script>
+</body>
+</html>
+"""
+
+@app.route('/')
+def index():
+    """Ruta principal que sirve la interfaz web de Grimoria."""
+    return render_template_string(HTML_TEMPLATE)
+
+if __name__ == '__main__':
+    print("\n" + "="*60)
+    print("✨ Servidor de Grimoria iniciado con éxito.")
+    print("👉 Abre tu navegador e ingresa a: http://127.0.0.1:5000")
+    print("="*60 + "\n")
+    app.run(debug=True, host='0.0.0.0', port=5000)
