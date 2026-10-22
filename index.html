@@ -6,57 +6,61 @@
     <title>Grimoria - Lluvia Extraordinaria</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Henny+Penny&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts Góticas y Victorianas -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Pirata+One&family=Special+Elite&family=MedievalSharp&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0510;
-            color: #e2d9f3;
+            font-family: 'Special Elite', cursive;
+            background-color: #050208;
+            color: #d1c7e0;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 50%, #160826 0%, #050208 100%);
         }
         .font-gothic {
-            font-family: 'Cinzel Decorative', serif;
+            font-family: 'Pirata One', cursive;
+            letter-spacing: 1px;
         }
-        .font-magic {
-            font-family: 'Henny Penny', cursive;
+        .font-creepy {
+            font-family: 'Creepster', cursive;
         }
-        .gold-gradient {
-            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+        .font-medieval {
+            font-family: 'MedievalSharp', cursive;
+        }
+        .gold-antique {
+            background: linear-gradient(135deg, #8c7335 0%, #e0c274 50%, #6b5322 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .glow-gold {
-            box-shadow: 0 0 25px rgba(191, 149, 63, 0.3);
+        .gothic-box {
+            background: #0d0614;
+            border: 2px solid #573a78;
+            box-shadow: 0 0 20px rgba(87, 58, 120, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.8);
         }
-        .stars {
-            background-image: radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                              radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                              radial-gradient(1px 1px at 90px 40px, #ddd, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: sparkle 4s ease-in-out infinite alternate;
+        .gothic-input {
+            background: #07030c;
+            border: 1px solid #724c9e;
+            color: #f0e6ff;
         }
-        @keyframes sparkle {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
+        /* Rayas góticas de fondo sutiles */
+        .fog-bg {
+            background-image: repeating-linear-gradient(45deg, rgba(87, 58, 120, 0.03) 0, rgba(87, 58, 120, 0.03) 1px, transparent 0, transparent 50px);
         }
     </style>
 </head>
-<body class="bg-[#0b0510] text-[#e2d9f3] min-h-screen relative stars selection:bg-amber-500 selection:text-black">
+<body class="bg-[#050208] text-[#d1c7e0] min-h-screen relative fog-bg selection:bg-purple-900 selection:text-white">
 
-    <!-- BARRA SUPERIOR DE REDES SOCIALES Y WEB -->
-    <header class="w-full bg-[#150a21]/90 border-b border-amber-900/40 sticky top-0 z-50 backdrop-blur-md">
+    <!-- BARRA SUPERIOR GÓTICA -->
+    <header class="w-full bg-[#0a0410] border-b border-[#3b2256] sticky top-0 z-50 backdrop-blur-md">
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
             <div class="flex items-center space-x-2">
-                <span class="text-2xl">🗝️</span>
-                <h1 class="font-gothic text-xl tracking-widest gold-gradient">GRIMORIA</h1>
+                <span class="text-2xl">🦇</span>
+                <h1 class="font-gothic text-2xl tracking-widest gold-antique">GRIMORIA</h1>
             </div>
             <div class="flex items-center space-x-6 text-sm">
-                <a href="https://instagram.com" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1 font-semibold">📸 Instagram</a>
-                <a href="https://tiktok.com" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1 font-semibold">🎵 TikTok</a>
-                <a href="https://facebook.com" target="_blank" class="hover:text-amber-400 transition flex items-center gap-1 font-semibold">👥 Facebook</a>
-                <a href="https://grimoria.com" target="_blank" class="px-3 py-1 bg-amber-600/20 border border-amber-500/40 rounded-full hover:bg-amber-500 hover:text-black transition font-semibold text-amber-300">🌐 Web Oficial</a>
+                <a href="https://instagram.com" target="_blank" class="hover:text-purple-400 transition flex items-center gap-1">🖤 Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="hover:text-purple-400 transition flex items-center gap-1">🕯️ TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="hover:text-purple-400 transition flex items-center gap-1">⚰️ Facebook</a>
+                <a href="https://grimoria.com" target="_blank" class="px-3 py-1 bg-purple-950/40 border border-[#573a78] rounded hover:bg-purple-900 transition text-purple-300">🌐 Web Oficial</a>
             </div>
         </div>
     </header>
@@ -65,103 +69,103 @@
     <main class="max-w-4xl mx-auto px-4 py-12 flex flex-col items-center text-center">
 
         <!-- TÍTULO DE CAMPAÑA -->
-        <div class="mb-8">
-            <span class="text-amber-400/80 tracking-widest uppercase text-xs font-semibold px-3 py-1 border border-amber-500/30 rounded-full bg-amber-950/30">Lluvia Extraordinaria</span>
-            <h2 class="font-gothic text-3xl md:text-5xl mt-4 gold-gradient">ESCANEA PARA DESCUBRIR QUÉ GANASTE</h2>
-            <p class="text-sm md:text-base text-gray-300 mt-2 italic">"Lo extraño también es extraordinario"</p>
+        <div class="mb-10">
+            <span class="text-purple-400 tracking-widest uppercase text-xs font-semibold px-4 py-1 border border-purple-800/60 rounded bg-purple-950/50">Edición Especial • Lluvia Extraordinaria</span>
+            <h2 class="font-gothic text-3xl md:text-5xl mt-5 gold-antique">RECLAMA TU DESTINO EN LAS SOMBRAS</h2>
+            <p class="text-sm md:text-base text-purple-300/80 mt-2 italic font-medieval">"Donde lo extraño y lo macabro se vuelven arte"</p>
         </div>
 
-        <!-- SECCIÓN DE RULETA / SORTEO INTERACTIVO -->
-        <div class="w-full bg-[#140b1f]/80 border-2 border-amber-500/30 rounded-2xl p-6 md:p-10 glow-gold mb-16 relative overflow-hidden">
-            <div class="absolute -right-10 -top-10 text-8xl opacity-5 select-none pointer-events-none font-gothic">🗝️</div>
+        <!-- SECCIÓN DE RULETA / Tómbola Gótica -->
+        <div class="w-full gothic-box rounded-xl p-6 md:p-10 mb-16 relative overflow-hidden">
+            <div class="absolute -left-6 -bottom-6 text-8xl opacity-10 select-none pointer-events-none font-gothic">🕷️</div>
             
-            <h3 class="font-gothic text-2xl text-amber-200 mb-4">🔮 El Oráculo de los Premios</h3>
-            <p class="text-gray-300 text-sm max-w-lg mx-auto mb-8">Haz girar la rueda mística para revelar el premio que te ha concedido el destino en este evento de Grimoria.</p>
+            <h3 class="font-gothic text-2xl text-purple-200 mb-3">⚷ La Cripta de los Premios</h3>
+            <p class="text-gray-400 text-sm max-w-lg mx-auto mb-8">Haz girar el mecanismo arcano para revelar la ofrenda que el destino ha preparado para ti.</p>
 
             <!-- Área de la Ruleta -->
             <div class="flex flex-col items-center justify-center">
-                <div id="wheel-display" class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-amber-500/60 bg-gradient-to-br from-[#221235] to-[#0b0510] flex items-center justify-center p-6 shadow-2xl relative transition-all duration-1000">
-                    <div class="absolute inset-0 rounded-full border border-dashed border-amber-400/30 animate-spin" style="animation-duration: 20s;"></div>
-                    <div id="wheel-text" class="font-gothic text-lg md:text-xl text-center text-amber-300 z-10 px-4">
-                        ¡Pulsa el botón para girar!
+                <div id="wheel-display" class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-[#724c9e] bg-[#05020a] flex items-center justify-center p-6 shadow-2xl relative transition-all duration-1000">
+                    <div class="absolute inset-0 rounded-full border border-dashed border-purple-600/40 animate-spin" style="animation-duration: 25s;"></div>
+                    <div id="wheel-text" class="font-gothic text-xl md:text-2xl text-center text-purple-300 z-10 px-4">
+                        Toca el sello para girar...
                     </div>
                 </div>
 
-                <button onclick="girarRuleta()" id="btn-spin" class="mt-8 px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-gothic font-bold rounded-full shadow-lg transform active:scale-95 transition cursor-pointer">
-                    ✨ DESCUBRIR MI PREMIO
+                <button onclick="girarRuleta()" id="btn-spin" class="mt-8 px-8 py-3 bg-gradient-to-r from-purple-900 to-[#573a78] hover:from-purple-800 hover:to-[#6c4896] text-purple-100 font-gothic text-lg tracking-wider rounded border border-purple-500/50 shadow-lg transform active:scale-95 transition cursor-pointer">
+                    🕯️ REVELAR MI OFRENDA
                 </button>
             </div>
 
             <!-- Resultado del Premio (Oculto inicialmente) -->
-            <div id="resultado-premio" class="hidden mt-8 p-6 bg-[#1f1030] border border-amber-500/50 rounded-xl">
-                <h4 class="text-xs uppercase tracking-wider text-amber-400 font-semibold">¡Felicidades, has ganado!</h4>
+            <div id="resultado-premio" class="hidden mt-8 p-6 bg-[#07030c] border border-purple-700/50 rounded-lg">
+                <h4 class="text-xs uppercase tracking-wider text-purple-400 font-semibold">💀 Has obtenido el siguiente beneficio:</h4>
                 <div id="texto-premio" class="font-gothic text-2xl text-white my-2"></div>
-                <p class="text-xs text-gray-300 mb-4">Muestra este código al asesor en el stand de Grimoria para hacer válido tu beneficio.</p>
+                <p class="text-xs text-gray-400 mb-4">Presenta este código secreto ante el guardián en el stand de Grimoria.</p>
                 
-                <div class="inline-block bg-black/60 border border-amber-500/40 px-6 py-2 rounded-lg text-amber-300 font-mono text-xl tracking-widest select-all mb-4" id="codigo-premio">
+                <div class="inline-block bg-black border border-purple-600/60 px-6 py-2 rounded text-purple-300 font-mono text-xl tracking-widest select-all mb-4" id="codigo-premio">
                     GRIMORIA-2026
                 </div>
                 <div>
-                    <button onclick="copiarCodigo()" class="text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-4 py-1.5 rounded-md transition cursor-pointer">📋 Copiar Código</button>
+                    <button onclick="copiarCodigo()" class="text-xs bg-purple-950 hover:bg-purple-900 text-purple-200 border border-purple-700 px-4 py-1.5 rounded transition cursor-pointer">📋 Copiar Código Secreto</button>
                 </div>
             </div>
         </div>
 
         <!-- SECCIÓN EXCLUSIVA LLAVE DORADA -->
-        <div class="w-full bg-gradient-to-b from-[#1a0f2b] to-[#0e0617] border-2 border-amber-400/50 rounded-2xl p-6 md:p-10 glow-gold relative">
-            <div class="absolute top-4 right-4 bg-amber-500 text-black text-[10px] font-bold uppercase px-2.5 py-1 rounded-full tracking-wider">Solo 5 en todo el país</div>
+        <div class="w-full bg-[#0d0614] border-2 border-amber-600/60 rounded-xl p-6 md:p-10 relative shadow-[0_0_30px_rgba(184,134,11,0.15)]">
+            <div class="absolute top-4 right-4 bg-amber-700/80 text-black text-[10px] font-bold uppercase px-2.5 py-1 rounded tracking-wider border border-amber-500">Reliquia Rara • Solo 5 Existentes</div>
             
-            <div class="text-4xl mb-2">🔑</div>
-            <h3 class="font-gothic text-2xl md:text-3xl text-amber-200 mb-2">¿Encontraste una Llave Dorada?</h3>
-            <p class="text-sm text-gray-300 max-w-lg mx-auto mb-6">Reservado únicamente para los 5 afortunados que hallaron la reliquia dorada en el interior de su empaque.</p>
+            <div class="text-4xl mb-2">🗝️</div>
+            <h3 class="font-gothic text-2xl md:text-3xl text-amber-300 mb-2">El Pacto de la Llave Gótica</h3>
+            <p class="text-sm text-gray-300 max-w-lg mx-auto mb-6">Exclusivo para los 5 portadores que encontraron la llave grabada en el interior de su reliquia.</p>
 
             <!-- Formulario de Validación de Llave -->
             <div class="max-w-md mx-auto space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-amber-300 uppercase tracking-wider mb-2 text-left">Ingresa el código secreto grabado en tu llave:</label>
-                    <input type="text" id="input-llave" placeholder="Ej: LLAVE-GOLD-2026" class="w-full px-4 py-3 bg-black/50 border border-amber-500/40 rounded-xl text-center text-amber-200 font-mono tracking-widest focus:outline-none focus:border-amber-400 uppercase">
+                    <label class="block text-xs font-semibold text-amber-400/80 uppercase tracking-wider mb-2 text-left">Introduce el código arcano de tu llave:</label>
+                    <input type="text" id="input-llave" placeholder="Ej: LLAVE-GOLD-2026" class="w-full px-4 py-3 gothic-input rounded text-center text-amber-200 font-mono tracking-widest focus:outline-none focus:border-amber-500 uppercase">
                 </div>
-                <button onclick="validarLlave()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-black font-gothic font-bold rounded-xl shadow-lg transition cursor-pointer">
-                    VALIDAR LLAVE DORADA
+                <button onclick="validarLlave()" class="w-full py-3 bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-600 hover:to-amber-500 text-black font-gothic text-lg rounded shadow-lg transition cursor-pointer">
+                    ROMPER EL SELLO DE LA LLAVE
                 </button>
-                <div class="text-left bg-black/30 p-3 rounded-lg border border-amber-500/20">
-                    <p class="text-[11px] text-amber-300/80 mb-1 font-semibold">💡 Códigos de prueba habilitados:</p>
+                <div class="text-left bg-black/40 p-3 rounded border border-amber-900/40">
+                    <p class="text-[11px] text-amber-400/70 mb-1 font-semibold">🕯️ Llaves de prueba para inspección:</p>
                     <div class="flex flex-wrap gap-2">
-                        <span onclick="autocompletarLlave('LLAVE-GOLD-2026')" class="text-[10px] bg-amber-950/50 border border-amber-500/30 text-amber-200 px-2 py-0.5 rounded cursor-pointer hover:bg-amber-500 hover:text-black transition">LLAVE-GOLD-2026</span>
-                        <span onclick="autocompletarLlave('GRIMORIA-GOLD-1')" class="text-[10px] bg-amber-950/50 border border-amber-500/30 text-amber-200 px-2 py-0.5 rounded cursor-pointer hover:bg-amber-500 hover:text-black transition">GRIMORIA-GOLD-1</span>
+                        <span onclick="autocompletarLlave('LLAVE-GOLD-2026')" class="text-[10px] bg-amber-950/60 border border-amber-700/50 text-amber-300 px-2 py-0.5 rounded cursor-pointer hover:bg-amber-800 hover:text-white transition">LLAVE-GOLD-2026</span>
+                        <span onclick="autocompletarLlave('GRIMORIA-GOLD-1')" class="text-[10px] bg-amber-950/60 border border-amber-700/50 text-amber-300 px-2 py-0.5 rounded cursor-pointer hover:bg-amber-800 hover:text-white transition">GRIMORIA-GOLD-1</span>
                     </div>
                 </div>
             </div>
 
             <!-- Portal de Círculo Dorado (Oculto hasta validar) -->
-            <div id="portal-dorado" class="hidden mt-8 pt-8 border-t border-amber-500/30">
-                <h4 class="font-gothic text-xl text-amber-300 mb-2">✨ ¡BIENVENIDO AL CÍRCULO DORADO! ✨</h4>
-                <p class="text-sm text-gray-200 mb-6">Has desbloqueado el máximo privilegio de Grimoria. Tu llave autentica tu pase anual completo.</p>
+            <div id="portal-dorado" class="hidden mt-8 pt-8 border-t border-amber-800/40">
+                <h4 class="font-gothic text-2xl text-amber-300 mb-2">🦇 ACCESO CONCEDIDO AL CÍRCULO OSCURO 🦇</h4>
+                <p class="text-sm text-gray-300 mb-6">Tu llave ha abierto las puertas del santuario. Has reclamado el derecho absoluto.</p>
                 
-                <div class="bg-black/40 border border-amber-500/40 rounded-xl p-6 text-left max-w-lg mx-auto space-y-4">
-                    <div class="flex justify-between items-center border-b border-amber-500/20 pb-3">
-                        <span class="text-xs text-amber-300 font-semibold uppercase">Beneficio Activo</span>
-                        <span class="text-xs font-bold text-white bg-amber-600/30 px-2.5 py-1 rounded border border-amber-500/40">1 AÑO GRATIS</span>
+                <div class="bg-black/60 border border-amber-700/40 rounded p-6 text-left max-w-lg mx-auto space-y-4">
+                    <div class="flex justify-between items-center border-b border-amber-900/40 pb-3">
+                        <span class="text-xs text-amber-400 font-semibold uppercase">Privilegio Absoluto</span>
+                        <span class="text-xs font-bold text-black bg-amber-500 px-2.5 py-1 rounded font-mono">1 AÑO GRATIS</span>
                     </div>
-                    <p class="text-xs text-gray-300 leading-relaxed">Recibirás automáticamente y sin costo cada nueva colección de caja sorpresa que publiquemos durante los próximos 365 días.</p>
+                    <p class="text-xs text-gray-300 leading-relaxed font-medieval text-sm">Recibirás en tu tumba (o domicilio) cada nueva colección de cajas sorpresa que emanen durante los próximos 365 lunas.</p>
                     
                     <!-- Formulario de captura de datos del ganador -->
                     <div class="pt-2 space-y-3">
-                        <p class="text-xs font-semibold text-amber-300">Regístrate para asegurar tu premio:</p>
-                        <input type="text" id="ganador-nombre" placeholder="Tu Nombre Completo" class="w-full px-3 py-2 bg-black/60 border border-amber-500/30 rounded-lg text-sm text-white focus:outline-none focus:border-amber-400">
-                        <input type="text" id="ganador-telefono" placeholder="Número de Teléfono / WhatsApp" class="w-full px-3 py-2 bg-black/60 border border-amber-500/30 rounded-lg text-sm text-white focus:outline-none focus:border-amber-400">
-                        <input type="text" id="ganador-insta" placeholder="Tu Usuario de Instagram (ej: @tu_usuario)" class="w-full px-3 py-2 bg-black/60 border border-amber-500/30 rounded-lg text-sm text-white focus:outline-none focus:border-amber-400">
+                        <p class="text-xs font-semibold text-amber-300">Confirma tus datos para registrar tu alma (y tu envío):</p>
+                        <input type="text" id="ganador-nombre" placeholder="Nombre Completo del Iniciado" class="w-full px-3 py-2 gothic-input rounded text-sm text-white focus:outline-none focus:border-amber-500">
+                        <input type="text" id="ganador-telefono" placeholder="Número de WhatsApp / Teléfono" class="w-full px-3 py-2 gothic-input rounded text-sm text-white focus:outline-none focus:border-amber-500">
+                        <input type="text" id="ganador-insta" placeholder="Tu Usuario de Instagram (ej: @grimoria_fan)" class="w-full px-3 py-2 gothic-input rounded text-sm text-white focus:outline-none focus:border-amber-500">
                         
-                        <button onclick="generarCodigoVIP()" class="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-lg text-sm transition mt-2 cursor-pointer">
-                            Generar mi Código de Canje VIP
+                        <button onclick="generarCodigoVIP()" class="w-full py-2.5 bg-amber-600 hover:bg-amber-500 text-black font-semibold font-gothic text-lg rounded transition mt-2 cursor-pointer">
+                            Sellar y Generar Pase VIP
                         </button>
                     </div>
 
                     <!-- Ticket VIP final generado -->
-                    <div id="vip-ticket-box" class="hidden mt-4 p-4 bg-amber-950/40 border border-amber-400/60 rounded-xl text-center space-y-2">
-                        <p class="text-xs text-amber-300 uppercase tracking-widest font-semibold">🎫 Tu Código Único VIP</p>
-                        <div id="codigo-vip-generado" class="font-mono text-xl text-white font-bold tracking-widest bg-black/50 py-2 rounded border border-amber-500/30"></div>
-                        <p class="text-[11px] text-gray-300">Envía este código por mensaje directo a <a href="https://instagram.com" target="_blank" class="text-amber-400 underline font-semibold">@grimoria</a> junto con tus datos para activar tu año gratis.</p>
+                    <div id="vip-ticket-box" class="hidden mt-4 p-4 bg-amber-950/30 border border-amber-600/60 rounded text-center space-y-2">
+                        <p class="text-xs text-amber-400 uppercase tracking-widest font-semibold">📜 Tu Sello VIP Único</p>
+                        <div id="codigo-vip-generado" class="font-mono text-xl text-amber-200 font-bold tracking-widest bg-black py-2 rounded border border-amber-800"></div>
+                        <p class="text-[11px] text-gray-300">Envía este código por mensaje privado a <a href="https://instagram.com" target="_blank" class="text-amber-400 underline font-semibold">@grimoria</a> junto a tus datos para invocar tu beneficio.</p>
                     </div>
                 </div>
             </div>
@@ -169,86 +173,7 @@
 
     </main>
 
-    <!-- PIE DE PÁGINA -->
-    <footer class="text-center py-8 text-xs text-gray-500 border-t border-amber-900/30 mt-20">
-        <p>&copy; 2026 Grimoria. Todos los derechos reservados.</p>
-        <p class="mt-1 italic text-amber-600/60 font-magic text-sm">"La curiosidad tiene quince capítulos."</p>
-    </footer>
-
-    <!-- SCRIPTS DE INTERACTIVIDAD -->
-    <script>
-        const premios = [
-            "25% de Descuento en tu Caja",
-            "¡Caja Sorpresa Gratis!",
-            "50% de Descuento en tu próxima compra",
-            "15% de Descuento adicional",
-            "¡Envío Gratis 1 Año!"
-        ];
-
-        function girarRuleta() {
-            const btn = document.getElementById('btn-spin');
-            const display = document.getElementById('wheel-display');
-            const text = document.getElementById('wheel-text');
-            const resultadoDiv = document.getElementById('resultado-premio');
-            
-            btn.disabled = true;
-            display.classList.add('rotate-[720deg]', 'scale-105');
-            text.innerHTML = "✨ Girando el destino...";
-
-            setTimeout(() => {
-                const premioAleatorio = premios[Math.floor(Math.random() * premios.length)];
-                const codigoAleatorio = 'GRIM-' + Math.floor(1000 + Math.random() * 9000);
-
-                text.innerHTML = "¡Premio Revelado!";
-                document.getElementById('texto-premio').innerHTML = premioAleatorio;
-                document.getElementById('codigo-premio').innerHTML = codigoAleatorio;
-                resultadoDiv.classList.remove('hidden');
-                
-                display.classList.remove('rotate-[720deg]', 'scale-105');
-                btn.disabled = false;
-            }, 1200);
-        }
-
-        function copiarCodigo() {
-            const codigo = document.getElementById('codigo-premio').innerText;
-            navigator.clipboard.writeText(codigo);
-            alert("¡Código copiado al portapapeles: " + codigo + "!");
-        }
-
-        function autocompletarLlave(codigo) {
-            document.getElementById('input-llave').value = codigo;
-        }
-
-        const llavesValidas = ["LLAVE-GOLD-2026", "GRIMORIA-GOLD-1", "GRIMORIA-GOLD-2", "GRIMORIA-GOLD-3", "GRIMORIA-GOLD-4", "GRIMORIA-GOLD-5"];
-
-        function validarLlave() {
-            const input = document.getElementById('input-llave').value.trim().toUpperCase();
-            const portal = document.getElementById('portal-dorado');
-
-            if (llavesValidas.includes(input)) {
-                portal.classList.remove('hidden');
-                portal.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert("Código de llave incorrecto o no registrado. Verifica los códigos de prueba sugeridos abajo.");
-            }
-        }
-
-        function generarCodigoVIP() {
-            const nombre = document.getElementById('ganador-nombre').value.trim();
-            const telefono = document.getElementById('ganador-telefono').value.trim();
-            const insta = document.getElementById('ganador-insta').value.trim();
-
-            if (!nombre || !telefono || !insta) {
-                alert("Por favor completa todos tus datos para generar tu pase VIP.");
-                return;
-            }
-
-            const codigoVIP = "GOLD-VIP-" + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('codigo-vip-generado').innerText = codigoVIP;
-            document.getElementById('vip-ticket-box').classList.remove('hidden');
-            
-            alert("¡Registro exitoso! Guarda tu código VIP único.");
-        }
-    </script>
-</body>
-</html>
+    <!-- PIE DE PÁGINA GÓTICO -->
+    <footer class="text-center py-8 text-xs text-purple-400/50 border-t border-purple-950 mt-20">
+        <p>&copy; 2026 Grimoria. Todos los derechos reservados bajo la luz de la luna.</p>
+        <p class="mt-1 italic font-medieval text-purple-
