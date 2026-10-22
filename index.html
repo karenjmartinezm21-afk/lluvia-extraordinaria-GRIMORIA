@@ -20,9 +20,6 @@
             font-family: 'Pirata One', cursive;
             letter-spacing: 1px;
         }
-        .font-creepy {
-            font-family: 'Creepster', cursive;
-        }
         .font-medieval {
             font-family: 'MedievalSharp', cursive;
         }
@@ -41,7 +38,6 @@
             border: 1px solid #724c9e;
             color: #f0e6ff;
         }
-        /* Rayas góticas de fondo sutiles */
         .fog-bg {
             background-image: repeating-linear-gradient(45deg, rgba(87, 58, 120, 0.03) 0, rgba(87, 58, 120, 0.03) 1px, transparent 0, transparent 50px);
         }
@@ -176,4 +172,83 @@
     <!-- PIE DE PÁGINA GÓTICO -->
     <footer class="text-center py-8 text-xs text-purple-400/50 border-t border-purple-950 mt-20">
         <p>&copy; 2026 Grimoria. Todos los derechos reservados bajo la luz de la luna.</p>
-        <p class="mt-1 italic font-medieval text-purple-
+        <p class="mt-1 italic font-medieval text-purple-400/70 text-sm">"La curiosidad tiene quince capítulos oscuros."</p>
+    </footer>
+
+    <!-- SCRIPTS DE INTERACTIVIDAD -->
+    <script>
+        const premios = [
+            "25% de Descuento en tu Caja",
+            "¡Caja Sorpresa Misteriosa Gratis!",
+            "50% de Descuento en tu próxima reliquia",
+            "15% de Descuento en artefactos oscuros",
+            "¡Envío Gratis por 1 Año Completo!"
+        ];
+
+        function girarRuleta() {
+            const btn = document.getElementById('btn-spin');
+            const display = document.getElementById('wheel-display');
+            const text = document.getElementById('wheel-text');
+            const resultadoDiv = document.getElementById('resultado-premio');
+            
+            btn.disabled = true;
+            display.classList.add('rotate-[720deg]', 'scale-105');
+            text.innerHTML = "🕯️ Invocando al destino...";
+
+            setTimeout(() => {
+                const premioAleatorio = premios[Math.floor(Math.random() * premios.length)];
+                const codigoAleatorio = 'CRYPT-' + Math.floor(1000 + Math.random() * 9000);
+
+                text.innerHTML = "¡Ofrenda Concedida!";
+                document.getElementById('texto-premio').innerHTML = premioAleatorio;
+                document.getElementById('codigo-premio').innerHTML = codigoAleatorio;
+                resultadoDiv.classList.remove('hidden');
+                
+                display.classList.remove('rotate-[720deg]', 'scale-105');
+                btn.disabled = false;
+            }, 1200);
+        }
+
+        function copiarCodigo() {
+            const codigo = document.getElementById('codigo-premio').innerText;
+            navigator.clipboard.writeText(codigo);
+            alert("¡Código copiado de las sombras: " + codigo + "!");
+        }
+
+        function autocompletarLlave(codigo) {
+            document.getElementById('input-llave').value = codigo;
+        }
+
+        const llavesValidas = ["LLAVE-GOLD-2026", "GRIMORIA-GOLD-1", "GRIMORIA-GOLD-2", "GRIMORIA-GOLD-3", "GRIMORIA-GOLD-4", "GRIMORIA-GOLD-5"];
+
+        function validarLlave() {
+            const input = document.getElementById('input-llave').value.trim().toUpperCase();
+            const portal = document.getElementById('portal-dorado');
+
+            if (llavesValidas.includes(input)) {
+                portal.classList.remove('hidden');
+                portal.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert("Llave inválida o cerrada por los espíritus. Revisa los códigos de prueba.");
+            }
+        }
+
+        function generarCodigoVIP() {
+            const nombre = document.getElementById('ganador-nombre').value.trim();
+            const telefono = document.getElementById('ganador-telefono').value.trim();
+            const insta = document.getElementById('ganador-insta').value.trim();
+
+            if (!nombre || !telefono || !insta) {
+                alert("Por favor completa los campos del pacto antes de generar tu sello.");
+                return;
+            }
+
+            const codigoVIP = "DARK-VIP-" + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('codigo-vip-generado').innerText = codigoVIP;
+            document.getElementById('vip-ticket-box').classList.remove('hidden');
+            
+            alert("¡Pacto sellado con éxito! Guarda tu código VIP.");
+        }
+    </script>
+</body>
+</html>
